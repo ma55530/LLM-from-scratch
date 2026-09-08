@@ -14,3 +14,7 @@ models/
 adapters/*
 !adapters/adapters.safetensors
 !adapters/adapter_config.json
+
+#attention html file
+*.html
+
