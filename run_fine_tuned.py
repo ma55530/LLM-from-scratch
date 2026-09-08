@@ -7,7 +7,7 @@ import sys
 model, tokenizer = load("mlx-community/Ministral-8B-Instruct-2410-4bit", adapter_path="adapters")
 
 
-sampler = make_sampler(temp=0.6, top_p=0.9)
+sampler = make_sampler(temp=0.6, top_p=0.7)
 
 while True:
     user_input = input("> ")

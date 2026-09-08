@@ -29,5 +29,7 @@ while True:
 
     output = model.generate(idx, MAX_NEW_TOKENS)[0].tolist()[len(tokens):]
 
-    print(encoding.decode(output))
+    messages = [m for m in encoding.decode(output).split('\n') if m.strip()]
+
+    print('\n'.join(messages[:2]))
     print()
