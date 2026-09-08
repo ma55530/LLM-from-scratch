@@ -1,0 +1,16 @@
+# caches / OS / editor
+__pycache__/
+.DS_Store
+.vscode/
+
+# personal data — never commit (keep only the processing scripts)
+data/*
+!data/*.py
+
+# model weights are too large for git — scratch_v2.pt is attached as a GitHub Release asset
+models/
+
+# LoRA training checkpoints — keep only the final adapter + config
+adapters/*
+!adapters/adapters.safetensors
+!adapters/adapter_config.json

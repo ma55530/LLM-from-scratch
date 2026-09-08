@@ -1,0 +1,50 @@
+{
+    "adapter_path": "adapters",
+    "batch_size": 8,
+    "clear_cache_threshold": 0,
+    "config": "lora_config.yaml",
+    "data": "data/QA",
+    "fine_tune_type": "lora",
+    "grad_accumulation_steps": 2,
+    "grad_checkpoint": true,
+    "iters": 8000,
+    "learning_rate": 2e-05,
+    "lora_parameters": {
+        "keys": [
+            "self_attn.q_proj",
+            "self_attn.k_proj",
+            "self_attn.v_proj",
+            "self_attn.o_proj",
+            "mlp.gate_proj",
+            "mlp.up_proj",
+            "mlp.down_proj"
+        ],
+        "rank": 8,
+        "scale": 12,
+        "dropout": 0.033
+    },
+    "lr_schedule": null,
+    "mask_prompt": false,
+    "max_seq_length": 512,
+    "model": "mlx-community/Ministral-8B-Instruct-2410-4bit",
+    "num_layers": 8,
+    "optimizer": "adamw",
+    "optimizer_config": {
+        "adam": {},
+        "adamw": {},
+        "muon": {},
+        "sgd": {},
+        "adafactor": {}
+    },
+    "project_name": null,
+    "report_to": null,
+    "resume_adapter_file": null,
+    "save_every": 100,
+    "seed": 0,
+    "steps_per_eval": 200,
+    "steps_per_report": 100,
+    "test": true,
+    "test_batches": 100,
+    "train": true,
+    "val_batches": 25
+}
