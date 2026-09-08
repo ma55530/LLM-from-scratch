@@ -9,8 +9,8 @@ from nnsight import NNsight
 
 from bigram import BigramLanguageModel, config_from_state_dict
 
-PROMPT = "Volim te jako puno"
-LAYER = int(sys.argv[1]) if len(sys.argv) > 1 else 0
+PROMPT = input("Type in the prompt: ")
+LAYER = int(input("Layer: "))
 OUT = Path('attention.html')
 
 encoding = tiktoken.get_encoding("gpt2") #openai tokenizer
@@ -25,7 +25,6 @@ nnsight_model = NNsight(model)
 ids = encoding.encode(PROMPT)
 tokens = torch.tensor(ids, dtype=torch.long)[None, :]
 str_tokens = [encoding.decode([i]) for i in ids] #circuitsvis wants strings, not ids
-
 
 attn = []
 with nnsight_model.trace(tokens):

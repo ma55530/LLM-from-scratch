@@ -2,3 +2,6 @@ torch
 tiktoken
 mlx-lm
 regex
+matplotlib
+circuitsvis
+nnsight
