@@ -72,7 +72,7 @@ Layer 0 is local: `L0H1` and `L0H2` are previous-token heads, with 63% and 68%
 of their attention one step back (the bright diagonals up top). Deeper layers
 pay attention on the first token instead. The bright left column is an "attention sink" (the first straight bright line in the matrix).
 
-`attention.py` in the project root renders one layer interactively. Input your prompt and the layer you want to look at!
+`attention.py` in the project root computes and shows the attention of all of the model's heads on a specific prompt. Input whatever prompt you like and look how tokens interact with each other!
 
 ## Data pipeline
 
