@@ -10,7 +10,6 @@ from nnsight import NNsight
 from bigram import BigramLanguageModel, config_from_state_dict
 
 PROMPT = input("Type in the prompt: ")
-LAYER = int(input("Layer: "))
 OUT = Path('attention.html')
 
 encoding = tiktoken.get_encoding("gpt2") #openai tokenizer
@@ -27,14 +26,16 @@ tokens = torch.tensor(ids, dtype=torch.long)[None, :]
 str_tokens = [encoding.decode([i]) for i in ids] #circuitsvis wants strings, not ids
 
 attn = []
+labels = []
 with nnsight_model.trace(tokens):
-    for h in range(n_heads):
-        attn.append(nnsight_model.blocks[LAYER].sa.heads[h].dropout.output.save())
+    for l in range(n_layers):
+        for h in range(n_heads):
+            attn.append(nnsight_model.blocks[l].sa.heads[h].dropout.output.save())
+            labels.append(f"L: {l}, H: {h}")
 
 #each head is (B, T, T), we want (n_heads, dest, src)
 patterns = torch.stack([a[0] for a in attn])
 
-html = cv.attention.attention_patterns(attention=patterns, tokens=str_tokens)
+html = cv.attention.attention_patterns(attention=patterns, tokens=str_tokens, attention_head_names=labels)
 OUT.write_text(str(html))
-print(f"layer {LAYER}, {n_heads} heads, {len(str_tokens)} tokens -> {OUT.resolve()}")
 webbrowser.open(OUT.resolve().as_uri())
